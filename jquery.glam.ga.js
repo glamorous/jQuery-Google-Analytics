@@ -1,12 +1,10 @@
 /**
- * @author Jonas De Smet - labs.glamorous.be
- * @version  0.0.1
- * @date 2009-08-01
+ * @author Jonas De Smet
+ * @version  0.5
+ * @date 2009-11-06
  * 
  * Glamorous Google Analytics - Let you track your website with Google Analytics
- * Documentation and usage: http://wiki.github.com/glamorous/jQuery-GoogleAnalytics/
- * 
- * It's preferable to use latest jQuery version. Tested with 1.3.2
+ * Documentation and usage in README file
  * 
  */
 (function($) {
