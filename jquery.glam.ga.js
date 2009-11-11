@@ -1,10 +1,12 @@
 /**
- * @author Jonas De Smet
- * @version  0.5
- * @date 2009-11-06
- * 
  * Glamorous Google Analytics - Let you track your website with Google Analytics
  * Documentation and usage in README file
+ * 
+ * @author Jonas De Smet - Glamorous
+ * @since 06.11.2009
+ * @copyright Jonas De Smet - Glamorous
+ * @version 0.6
+ * @license BSD http://www.opensource.org/licenses/bsd-license.php
  * 
  */
 (function($) {
