@@ -117,7 +117,13 @@ We didn't find any bugs (yet). If you find one, please inform us with the issue 
 
 ## Changelog ##
 
-v0.5 This is the first version of the plugin but not bullet-proof so not a 1.0 release for now...
+**0.7 - 16/11/2009**
+
+- Addes 2 semicolons add the ends of the functions
+
+**0.5**
+
+- This is the first version of the plugin but not bullet-proof so not a 1.0 release for now...
 
 ## Feature Requests / To come ##
 

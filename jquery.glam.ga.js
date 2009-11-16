@@ -5,7 +5,7 @@
  * @author Jonas De Smet - Glamorous
  * @since 06.11.2009
  * @copyright Jonas De Smet - Glamorous
- * @version 0.6
+ * @version 0.7
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  * 
  */
@@ -157,7 +157,7 @@
 			
 		}
 			
-	}
+	};
 	
 	// Custom call for one 'action'
 	$.glamGA.customTrack = function(uatracker, settings)
@@ -211,7 +211,7 @@
 				pageTracker._trackPageview(settings.url);
 			}
 		}
-	}
+	};
 	
 	// Custom call for one or more elements
 	$.fn.glamGA = function(uatracker, settings)
