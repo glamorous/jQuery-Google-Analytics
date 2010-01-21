@@ -113,9 +113,13 @@ You have to provide an extra setting **event**. Default is this 'click'.
 
 ## Issues/Bugs ##
 
-We didn't find any bugs (yet). If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-GoogleAnalytics/issues).
+If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-GoogleAnalytics/issues).
 
 ## Changelog ##
+
+**0.7.1 - 22/01/2010**
+
+- [bug] Closes #1: Error with links without a 'href' attribute
 
 **0.7 - 16/11/2009**
 

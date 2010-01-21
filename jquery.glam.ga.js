@@ -3,9 +3,9 @@
  * Documentation and usage in README file
  * 
  * @author Jonas De Smet - Glamorous
- * @since 06.11.2009
+ * @since 22.01.2010
  * @copyright Jonas De Smet - Glamorous
- * @version 0.7
+ * @version 0.7.1
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  * 
  */
@@ -85,18 +85,21 @@
 			{
 				var href = $(links[i]).attr('href');
 				
-				if ((href.match(/^https?\:/i)) && (!href.match(document.domain)))
-				{
-					external.push(links[i]);
-				}
-				else if (href.match(/^mailto\:/i))
-				{
-					mails.push(links[i]);
-				}
-				else if($.inArray(href.split('.')[href.split('.').length - 1], settings.filetypes) >= 0)
-				{
-					files.push(links[i]);
-				}
+                if (href != null) 
+                {
+                    if ((href.match(/^https?\:/i)) && (!href.match(document.domain))) 
+                    {
+                        external.push(links[i]);
+                    }
+                    else if (href.match(/^mailto\:/i)) 
+                    {
+                        mails.push(links[i]);
+                    }
+                    else if ($.inArray(href.split('.')[href.split('.').length - 1], settings.filetypes) >= 0) 
+                    {
+                        files.push(links[i]);
+                    }
+                }
 			}
 			
 			if(DEBUG)
