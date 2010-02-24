@@ -85,21 +85,21 @@
 			{
 				var href = $(links[i]).attr('href');
 				
-                if (href != null) 
-                {
-                    if ((href.match(/^https?\:/i)) && (!href.match(document.domain))) 
-                    {
-                        external.push(links[i]);
-                    }
-                    else if (href.match(/^mailto\:/i)) 
-                    {
-                        mails.push(links[i]);
-                    }
-                    else if ($.inArray(href.split('.')[href.split('.').length - 1], settings.filetypes) >= 0) 
-                    {
-                        files.push(links[i]);
-                    }
-                }
+				if (href != null) 
+				{
+					if ((href.match(/^https?\:/i)) && (!href.match(document.domain))) 
+					{
+						external.push(links[i]);
+					}
+					else if (href.match(/^mailto\:/i)) 
+					{
+						mails.push(links[i]);
+					}
+					else if ($.inArray(href.split('.')[href.split('.').length - 1], settings.filetypes) >= 0) 
+					{
+						files.push(links[i]);
+					}
+				}
 			}
 			
 			if(DEBUG)
