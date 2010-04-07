@@ -113,7 +113,7 @@ You have to provide an extra setting **event**. Default is this 'click'.
 
 ## Issues/Bugs ##
 
-If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-GoogleAnalytics/issues).
+If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-Google-Analytics/issues).
 
 ## Changelog ##
 
@@ -135,7 +135,7 @@ If you find one, please inform us with the issue tracker on [github](http://gith
 *  More inline documentation
 *  Examples and demo's
 
-If you want something to add on this plugin, feel free to fork the project on [github](http://github.com/glamorous/jQuery-GoogleAnalytics) or add an [issue](http://github.com/glamorous/jQuery-GoogleAnalytics/issues) as a feature request.
+If you want something to add on this plugin, feel free to fork the project on [github](http://github.com/glamorous/jQuery-Google-Analytics) or add an [issue](http://github.com/glamorous/jQuery-Google-Analytics/issues) as a feature request.
 
 ## License ##
 
