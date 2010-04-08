@@ -32,6 +32,7 @@ Yes, it's so simple! The code above is pretty the same as this:
         $.glamGA('UA-*******-*', {
             debug: false,
 			localhost: false,
+			localextension: 'dev',
 			trackPage: true,
 			trackLinks: true,
 			trackMails: true,
@@ -64,6 +65,7 @@ These parameters from trackEvent you can find also in the _default prefereces_ (
 
 *  **debug**: when true, it will output informational console logs (firebug) or alerts
 *  **localhost**: when true, it will be available (and tracking) when developing on the localhost too
+*  **localextension**: default is this 'dev' so you can use an URL like http://website.dev instead of http://localhost/
 *  **trackPage**: when true, the basic pageview tracking is enabled
 *  **trackLinks**: when true, it will tracking all external links as events with label 'Visit'
 *  **trackMails**: when true, it will tracking all `mailto:`-links as events with
@@ -116,6 +118,12 @@ You have to provide an extra setting **event**. Default is this 'click'.
 If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-Google-Analytics/issues).
 
 ## Changelog ##
+
+**0.8.0 - 08/04/2010**
+
+- [bug] Closes some little bugs
+- [feature] Possibility to use custom URL instead of http://localhost/ by adding different extension
+- [improvement] Delete logging. Still available by loading the [jQuery-Utilities](http://github.com/glamorous/jQuery-Utilities) class before this class
 
 **0.7.1 - 22/01/2010**
 

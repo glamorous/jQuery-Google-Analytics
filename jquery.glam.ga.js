@@ -3,9 +3,9 @@
  * Documentation and usage in README file
  * 
  * @author Jonas De Smet - Glamorous
- * @since 22.01.2010
+ * @date 08.04.2010
  * @copyright Jonas De Smet - Glamorous
- * @version 0.7.1
+ * @version 0.8.0
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  * 
  */
@@ -17,21 +17,22 @@
 	$.glamGA = function(uatracker, settings)
 	{
 		settings = $.extend({}, $.glamGA.defaults, settings);
-		var DEBUG = (settings.debug) ? true : false;
+		var DEBUG = (settings.debug && $.glamLog !== undefined) ? true : false;
 		var pluginname = 'Glamorous GA (global)';
-		var domain = document.location.hostname;
+		var domain = document.location.host;
+		var extension = domain.substr(domain.lastIndexOf('.')+1);
 		var external = [];
 		var mails = [];
 		var files = [];
 		
-		if(domain != 'localhost' || settings.localhost)
+		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
 		{
-			if(DEBUG){$.glamLog(pluginname,'Google Analytics enabled', 'INFO');}
+			if(DEBUG){$.glamLog('Google Analytics enabled', 'INFO', pluginname);}
 			init();
 		}
 		else
 		{
-			if(DEBUG){$.glamLog(pluginname,'Google Analytics disabled', 'WARN');}
+			if(DEBUG){$.glamLog('Google Analytics disabled', 'WARN', pluginname);}
 		}
 		
 		function init()
@@ -43,15 +44,15 @@
 			{
 				//use jQuery to call the Google Analytics JavaScript
 				$.getScript(gaHost + "google-analytics.com/ga.js", function(){
-					if(DEBUG){$.glamLog(pluginname,'Google Analytics ga.js file loaded succesful', 'INFO');}
+					if(DEBUG){$.glamLog('Google Analytics ga.js file loaded succesful', 'INFO', pluginname);}
 					setupTracking();						
 				}, function(){
-					if(DEBUG){$.glamLog(pluginname,'Google Analytics ga.js file failed to load:' + err, 'ERROR');}
+					if(DEBUG){$.glamLog('Google Analytics ga.js file failed to load:' + err, 'ERROR', pluginname);}
 				}, true);
 			} 
 			catch(err) 
 			{
-				if(DEBUG){$.glamLog(pluginname,'A unexpected error has just been triggered', 'ERROR');}
+				if(DEBUG){$.glamLog('A unexpected error has just been triggered', 'ERROR', pluginname);}
 			}			
 		}
 		
@@ -60,22 +61,22 @@
 			// Get Tracker
 			try {
 				var pageTracker = _gat._getTracker(uatracker);
-				if(DEBUG){$.glamLog(pluginname,'Google Analytics pageTracker received successful', 'INFO');}
+				if(DEBUG){$.glamLog('Google Analytics pageTracker received successful', 'INFO', pluginname);}
 			}
 			catch(err) 
 			{
-				if(DEBUG){$.glamLog(pluginname,'Google Analytics pageTracker failed to receive: ' + err, 'ERROR');}
+				if(DEBUG){$.glamLog('Google Analytics pageTracker failed to receive: ' + err, 'ERROR', pluginname);}
 			}
 			
 			//Track view for this page
 			if(settings.trackPage)
 			{
 				pageTracker._trackPageview();
-				if(DEBUG){$.glamLog(pluginname,'trackPage enabled', 'INFO');}
+				if(DEBUG){$.glamLog('trackPage enabled', 'INFO', pluginname);}
 			}
 			else
 			{
-				if(DEBUG){$.glamLog(pluginname,'trackPage disabled', 'WARN');}
+				if(DEBUG){$.glamLog('trackPage disabled', 'WARN', pluginname);}
 			}
 			
 			//Extract all the links from the page and store them in arrays
@@ -85,7 +86,7 @@
 			{
 				var href = $(links[i]).attr('href');
 				
-				if (href != null) 
+				if (href !== undefined) 
 				{
 					if ((href.match(/^https?\:/i)) && (!href.match(document.domain))) 
 					{
@@ -104,9 +105,9 @@
 			
 			if(DEBUG)
 			{
-				$.glamLog(pluginname,'#external links = '+external.length, 'LOG');
-				$.glamLog(pluginname,'#mailto links = '+mails.length, 'LOG');
-				$.glamLog(pluginname,'#download links = '+files.length, 'LOG');
+				$.glamLog('#external links = '+external.length, 'LOG', pluginname);
+				$.glamLog('#mailto links = '+mails.length, 'LOG', pluginname);
+				$.glamLog('#download links = '+files.length, 'LOG', pluginname);
 			}
 			
 			//Track all external links
@@ -117,11 +118,11 @@
 					var linktxt = (link.attr('title') != '' && settings.titleLinks) ? link.attr('title') + ' [' + link.attr('href').replace(/^https?\:\/\//i, '') + ']' : link.attr('href').replace(/^https?\:\/\//i, '');
 					pageTracker._trackEvent(settings.categoryLinks, 'Visit', linktxt);
 				});
-				if(DEBUG){$.glamLog(pluginname,'trackLinks enabled', 'INFO');}
+				if(DEBUG){$.glamLog('trackLinks enabled', 'INFO', pluginname);}
 			}
 			else
 			{
-				if(DEBUG){$.glamLog(pluginname,'trackLinks disabled', 'WARN');}
+				if(DEBUG){$.glamLog('trackLinks disabled', 'WARN', pluginname);}
 			}
 			
 			
@@ -133,11 +134,11 @@
 					var emailtxt = email.attr('href').substring(7);
 					pageTracker._trackEvent(settings.categoryMails, 'Click', emailtxt);
 				});
-				if(DEBUG){$.glamLog(pluginname,'trackMails enabled', 'INFO');}
+				if(DEBUG){$.glamLog('trackMails enabled', 'INFO', pluginname);}
 			}
 			else
 			{
-				if(DEBUG){$.glamLog(pluginname,'trackMails disabled', 'WARN');}
+				if(DEBUG){$.glamLog('trackMails disabled', 'WARN', pluginname);}
 			}
 			
 			
@@ -151,11 +152,11 @@
 					var filename = filehref.substring(filehref.lastIndexOf('/')+1);
 					pageTracker._trackEvent(settings.categoryFiles, fileext, filename);
 				});
-				if(DEBUG){$.glamLog(pluginname,'trackFiles enabled', 'INFO');}
+				if(DEBUG){$.glamLog('trackFiles enabled', 'INFO', pluginname);}
 			}
 			else
 			{
-				if(DEBUG){$.glamLog(pluginname,'trackFiles disabled', 'WARN');}
+				if(DEBUG){$.glamLog('trackFiles disabled', 'WARN', pluginname);}
 			}
 			
 		}
@@ -166,18 +167,19 @@
 	$.glamGA.customTrack = function(uatracker, settings)
 	{
 		settings = $.extend({}, $.glamGA.customdefaults, settings);
-		var DEBUG = (settings.debug)? true : false;
+		var DEBUG = (settings.debug && $.glamLog !== undefined) ? true : false;
 		var pluginname = 'Glamorous GA (custom)';
-		var domain = document.location.hostname;
+		var domain = document.location.host;
+		var extension = domain.substr(domain.lastIndexOf('.')+1);
 		
-		if(domain != 'localhost' || settings.localhost)
+		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
 		{
-			if(DEBUG){$.glamLog(pluginname,'Google Analytics enabled', 'INFO');}
+			if(DEBUG){$.glamLog('Google Analytics enabled', 'INFO', pluginname);}
 			init();
 		}
 		else
 		{
-			if(DEBUG){$.glamLog(pluginname,'Google Analytics disabled', 'WARN');}
+			if(DEBUG){$.glamLog('Google Analytics disabled', 'WARN', pluginname);}
 		}
 		
 		function init()
@@ -189,15 +191,15 @@
 			{
 				//use jQuery to call the Google Analytics JavaScript
 				$.getScript(gaHost + "google-analytics.com/ga.js", function(){
-					if(DEBUG){$.glamLog(pluginname,'Google Analytics ga.js file loaded succesful', 'INFO');}
+					if(DEBUG){$.glamLog('Google Analytics ga.js file loaded succesful', 'INFO', pluginname);}
 					trackIt();				
 				}, function(){
-					if(DEBUG){$.glamLog(pluginname,'Google Analytics ga.js file failed to load:' + err, 'ERROR');}
+					if(DEBUG){$.glamLog('Google Analytics ga.js file failed to load:' + err, 'ERROR', pluginname);}
 				}, true);
 			} 
 			catch(err) 
 			{
-				if(DEBUG){$.glamLog(pluginname,'A unexpected error has just been triggered', 'ERROR');}
+				if(DEBUG){$.glamLog('A unexpected error has just been triggered', 'ERROR', pluginname);}
 			}
 		}
 		
@@ -234,6 +236,7 @@
 	{
 		debug: false,
 		localhost: false,
+		localextension: 'dev',
 		trackPage: true,
 		trackLinks: true,
 		trackMails: true,
@@ -250,6 +253,7 @@
 	{
 		debug: false,
 		localhost: false,
+		localextension: 'dev',
 		type: 'event',
 		url: '/AJAX/example',
 		category: 'Custom',
@@ -257,33 +261,4 @@
 		label: 'example',
 		event: 'click'
 	};
-	
-	// Glamorous LOGGING
-	$.glamLog = function(plugin, message, type) 
-	{
-		var msg = '['+type+'] '+plugin+' - '+message;
-		if(window.console) {
-			switch(type)
-			{
-				case 'DEBUG':
-					console.debug(msg);
-					break;
-				case 'LOG':
-					console.log(msg);
-					break;
-				case 'INFO':
-					console.info(msg);
-					break;
-				case 'WARN':
-					console.warn(msg);
-					break;
-				case 'ERROR':
-					console.error(msg);
-					break;
-			}
-		} else {
-			alert(msg);
-		}
-	};
-
 })(jQuery);
