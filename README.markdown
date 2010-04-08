@@ -119,6 +119,10 @@ If you find one, please inform us with the issue tracker on [github](http://gith
 
 ## Changelog ##
 
+**0.8.1 - 08/04/2010**
+
+- Clean-up + minified version
+
 **0.8.0 - 08/04/2010**
 
 - [bug] Closes some little bugs
@@ -139,7 +143,6 @@ If you find one, please inform us with the issue tracker on [github](http://gith
 
 ## Feature Requests / To come ##
 
-*  Minified and packed versions of the plugin
 *  More inline documentation
 *  Examples and demo's
 

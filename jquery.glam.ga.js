@@ -5,7 +5,7 @@
  * @author Jonas De Smet - Glamorous
  * @date 08.04.2010
  * @copyright Jonas De Smet - Glamorous
- * @version 0.8.0
+ * @version 0.8.1
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  * 
  */
@@ -24,16 +24,6 @@
 		var external = [];
 		var mails = [];
 		var files = [];
-		
-		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
-		{
-			if(DEBUG){$.glamLog('Google Analytics enabled', 'INFO', pluginname);}
-			init();
-		}
-		else
-		{
-			if(DEBUG){$.glamLog('Google Analytics disabled', 'WARN', pluginname);}
-		}
 		
 		function init()
 		{	
@@ -125,7 +115,6 @@
 				if(DEBUG){$.glamLog('trackLinks disabled', 'WARN', pluginname);}
 			}
 			
-			
 			//Track all mailto links
 			if(settings.trackMails)
 			{
@@ -140,8 +129,7 @@
 			{
 				if(DEBUG){$.glamLog('trackMails disabled', 'WARN', pluginname);}
 			}
-			
-			
+
 			//Track all files links
 			if(settings.trackFiles)
 			{
@@ -158,19 +146,7 @@
 			{
 				if(DEBUG){$.glamLog('trackFiles disabled', 'WARN', pluginname);}
 			}
-			
 		}
-			
-	};
-	
-	// Custom call for one 'action'
-	$.glamGA.customTrack = function(uatracker, settings)
-	{
-		settings = $.extend({}, $.glamGA.customdefaults, settings);
-		var DEBUG = (settings.debug && $.glamLog !== undefined) ? true : false;
-		var pluginname = 'Glamorous GA (custom)';
-		var domain = document.location.host;
-		var extension = domain.substr(domain.lastIndexOf('.')+1);
 		
 		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
 		{
@@ -181,6 +157,16 @@
 		{
 			if(DEBUG){$.glamLog('Google Analytics disabled', 'WARN', pluginname);}
 		}
+	};
+	
+	// Custom call for one 'action'
+	$.glamGA.customTrack = function(uatracker, settings)
+	{
+		settings = $.extend({}, $.glamGA.customdefaults, settings);
+		var DEBUG = (settings.debug && $.glamLog !== undefined) ? true : false;
+		var pluginname = 'Glamorous GA (custom)';
+		var domain = document.location.host;
+		var extension = domain.substr(domain.lastIndexOf('.')+1);
 		
 		function init()
 		{
@@ -216,6 +202,16 @@
 				pageTracker._trackPageview(settings.url);
 			}
 		}
+		
+		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
+		{
+			if(DEBUG){$.glamLog('Google Analytics enabled', 'INFO', pluginname);}
+			init();
+		}
+		else
+		{
+			if(DEBUG){$.glamLog('Google Analytics disabled', 'WARN', pluginname);}
+		}
 	};
 	
 	// Custom call for one or more elements
@@ -229,7 +225,6 @@
 			});
 		});
 	};
-	
 
 	// Default settings 
 	$.glamGA.defaults = 
