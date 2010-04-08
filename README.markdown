@@ -98,6 +98,7 @@ There are a little more options for both of them:
 
 *  **debug**: when true, it will output informational console logs (firebug) or alerts
 *  **localhost**: when true, it will be available (and tracking) when developing on the localhost too
+*  **localextension**: default is this 'dev' so you can use an URL like http://website.dev instead of http://localhost/
 *  **type**: 'event' or 'view': 'event' is for `_trackEvent` and 'view' for `_trackPageview`
 *  **url**: only necessary when _type_ is 'view': this 'url' will then be tracked as a pageview
 *  **category**: category for the `_trackEvent`
