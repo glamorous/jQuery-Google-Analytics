@@ -112,13 +112,17 @@ Maybe you prefer to do some cool jQuery scripting to call the plugin.
     $('a.coolstuff').glamGA('UA-*******-*', settings);
 
 All the settings from the custom call you can use here. Just one is extra setting is necessary so the plugin can do his work. 
-You have to provide an extra setting **event**. Default is this 'click'.
+You have to provide an extra setting **event**. Default is this `click`.
 
 ## Issues/Bugs ##
 
 If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-Google-Analytics/issues).
 
 ## Changelog ##
+
+**0.8.2 - 08/06/2010**
+
+- Refactor some code for a better performance.
 
 **0.8.1 - 08/04/2010**
 
