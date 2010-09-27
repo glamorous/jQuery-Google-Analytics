@@ -32,7 +32,7 @@ Yes, it's so simple! The code above is pretty the same as this:
         $.glamGA('UA-*******-*', {
             debug: false,
 			localhost: false,
-			localextension: 'dev',
+			localextension: ['dev','stag'],
 			trackPage: true,
 			trackLinks: true,
 			trackMails: true,
@@ -65,7 +65,7 @@ These parameters from trackEvent you can find also in the _default prefereces_ (
 
 *  **debug**: when true, it will output informational console logs (firebug) or alerts
 *  **localhost**: when true, it will be available (and tracking) when developing on the localhost too
-*  **localextension**: default is this 'dev' so you can use an URL like http://website.dev instead of http://localhost/
+*  **localextension**:  default is this an array with 'dev' and 'stag' so you can use an URL like http://website.dev instead or http://localhost/. Using is a single string is still possible
 *  **trackPage**: when true, the basic pageview tracking is enabled
 *  **trackLinks**: when true, it will tracking all external links as events with label 'Visit'
 *  **trackMails**: when true, it will tracking all `mailto:`-links as events with
@@ -98,7 +98,7 @@ There are a little more options for both of them:
 
 *  **debug**: when true, it will output informational console logs (firebug) or alerts
 *  **localhost**: when true, it will be available (and tracking) when developing on the localhost too
-*  **localextension**: default is this 'dev' so you can use an URL like http://website.dev instead of http://localhost/
+*  **localextension**: default is this an array with 'dev' and 'stag' so you can use an URL like http://website.dev instead or http://localhost/. Using is a single string is still possible
 *  **type**: 'event' or 'view': 'event' is for `_trackEvent` and 'view' for `_trackPageview`
 *  **url**: only necessary when _type_ is 'view': this 'url' will then be tracked as a pageview
 *  **category**: category for the `_trackEvent`
@@ -119,6 +119,10 @@ You have to provide an extra setting **event**. Default is this `click`.
 If you find one, please inform us with the issue tracker on [github](http://github.com/glamorous/jQuery-Google-Analytics/issues).
 
 ## Changelog ##
+
+**0.8.3 - 27/09/2010**
+
+- Changed the way localextension works. It's now an array ['dev','stag'] but for backward compatibility passing a string is just fine.
 
 **0.8.2 - 08/06/2010**
 

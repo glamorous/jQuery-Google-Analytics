@@ -3,9 +3,9 @@
  * Documentation and usage in README file
  * 
  * @author Jonas De Smet - Glamorous
- * @date 08.06.2010
+ * @date 27.09.2010
  * @copyright Jonas De Smet - Glamorous
- * @version 0.8.2
+ * @version 0.8.3
  * @license BSD http://www.opensource.org/licenses/bsd-license.php
  * 
  */
@@ -17,6 +17,7 @@
 	$.glamGA = function(uatracker, settings)
 	{
 		settings = $.extend({}, $.glamGA.defaults, settings);
+		settings.localextension = ! $.isArray(settings.localextension) ? [settings.localextension] : settings.localextension;
 		var DEBUG = (settings.debug && $.glamLog !== undefined) ? true : false;
 		var pluginname = 'Glamorous GA (global)';
 		var domain = document.location.host;
@@ -152,8 +153,8 @@
 				if(DEBUG){$.glamLog('Google Analytics pageTracker failed to receive: ' + err, 'ERROR', pluginname);}
 			}
 		}
-		
-		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
+
+		if((domain !== 'localhost' && $.inArray(extension, settings.localextension) === -1) || settings.localhost)
 		{
 			if(DEBUG){$.glamLog('Google Analytics enabled', 'INFO', pluginname);}
 			init();
@@ -168,6 +169,7 @@
 	$.glamGA.customTrack = function(uatracker, settings)
 	{
 		settings = $.extend({}, $.glamGA.customdefaults, settings);
+		settings.localextension = ! $.isArray(settings.localextension) ? [settings.localextension] : settings.localextension;
 		var DEBUG = (settings.debug && $.glamLog !== undefined) ? true : false;
 		var pluginname = 'Glamorous GA (custom)';
 		var domain = document.location.host;
@@ -210,7 +212,7 @@
 			}
 		}
 		
-		if((domain !== 'localhost' && extension !== settings.localextension) || settings.localhost)
+		if((domain !== 'localhost' && $.inArray(extension, settings.localextension) === -1) || settings.localhost)
 		{
 			if(DEBUG){$.glamLog('Google Analytics enabled', 'INFO', pluginname);}
 			init();
@@ -235,7 +237,7 @@
 	{
 		debug: false,
 		localhost: false,
-		localextension: 'dev',
+		localextension: ['dev','stag'],
 		trackPage: true,
 		trackLinks: true,
 		trackMails: true,
@@ -252,7 +254,7 @@
 	{
 		debug: false,
 		localhost: false,
-		localextension: 'dev',
+		localextension: ['dev','stag'],
 		type: 'event',
 		url: '/AJAX/example',
 		category: 'Custom',
